@@ -15,3 +15,8 @@ def prune_old_data():
             [(t, h) for t, h in buffer[station] if t >= cutoff],
             maxlen=ROLLING_WINDOW_HOURS * 60
         )
+def get_log():
+    """
+    Return a copy of the current log for inspection or analysis.
+    """
+    return log.copy()
