@@ -1,22 +1,34 @@
-from collections import defaultdict, deque
 from datetime import datetime, timedelta
 
-# Rolling log buffer (per station)
-ROLLING_WINDOW_HOURS = 24
-buffer = defaultdict(lambda: deque(maxlen=ROLLING_WINDOW_HOURS * 60))  # 1 reading/minute
+# Store recent readings
+log = []
 
-def log_reading(station, timestamp, H):
-    buffer[station].append((timestamp, H))
+ROLLING_WINDOW_MINUTES = 30
+
+def log_reading(station, timestamp, h_value):
+    entry = {
+        "station": station,
+        "timestamp": timestamp,
+        "H": h_value
+    }
+    log.append(entry)
+    print(f"📝 Logged reading: {station} @ {timestamp} → H = {h_value}")
 
 def prune_old_data():
-    cutoff = datetime.utcnow() - timedelta(hours=ROLLING_WINDOW_HOURS)
-    for station in buffer:
-        buffer[station] = deque(
-            [(t, h) for t, h in buffer[station] if t >= cutoff],
-            maxlen=ROLLING_WINDOW_HOURS * 60
-        )
+    global log
+    cutoff = datetime.utcnow() - timedelta(minutes=ROLLING_WINDOW_MINUTES)
+    pruned_log = []
+
+    for entry in log:
+        try:
+            timestamp = datetime.fromisoformat(entry["timestamp"].replace("Z", "+00:00"))
+            if timestamp >= cutoff:
+                pruned_log.append(entry)
+        except Exception as e:
+            print(f"⚠️ Timestamp parse error: {entry.get('timestamp')} → {e}")
+
+    print(f"🧹 Pruned log: {len(log)} → {len(pruned_log)} entries")
+    log = pruned_log
+
 def get_log():
-    """
-    Return a copy of the current log for inspection or analysis.
-    """
     return log.copy()
