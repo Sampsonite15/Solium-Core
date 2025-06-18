@@ -1,0 +1,23 @@
+[
+  {
+    "name": "2023 FT1",
+    "approach_date": "2025-06-17",
+    "miss_distance_km": 5823000,
+    "velocity_km_s": 12.78,
+    "magnitude": 22.3
+  },
+  {
+    "name": "2025 AB",
+    "approach_date": "2025-06-18",
+    "miss_distance_km": 7241000,
+    "velocity_km_s": 9.52,
+    "magnitude": 20.1
+  },
+  {
+    "name": "2024 XR2",
+    "approach_date": "2025-06-19",
+    "miss_distance_km": 10380000,
+    "velocity_km_s": 16.03,
+    "magnitude": 19.6
+  }
+]
