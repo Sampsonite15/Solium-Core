@@ -1,14 +1,13 @@
-import requests
 
-ALERTS_URL = "https://services.swpc.noaa.gov/products/alerts.json"
-
-def fetch():
-    r = requests.get(ALERTS_URL, timeout=10).json()
-
-    for alert in reversed(r):  # Newest first
-        msg = alert.get("message", "")
-        print(msg)
-        print("——————")  # Separator between messages for readability
-
-if __name__ == "__main__":
-    fetch()
+[
+  {
+    "station": "CENS",
+    "timestamp": "2025-06-17T21:00:00Z",
+    "H": -12345.67
+  },
+  {
+    "station": "BRW",
+    "timestamp": "2025-06-17T21:00:00Z",
+    "H": -23456.78
+  }
+]
