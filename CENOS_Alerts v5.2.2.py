@@ -1,11 +1,24 @@
 import requests
+import os
 import math
 from datetime import datetime
 import pytz
 import json
 from pathlib import Path
+from mirror_to_json import mirror_to_json
 
 # ---------- Core Functions ----------
+def mirror_to_json(neo_path, path="neo_alert_log.json"):
+    mirror_data = {
+        "name": neo.get("name"),
+        "neo_reference_id": neo.get("neo_reference_id"),
+        "ars": neo.get("ars"),
+        "tier": neo.get("tier"),
+        "timestamp_local": neo.get("timestamp_local"),
+        "hazardous": neo.get("is_potentially_hazardous_asteroid"),
+        "composition": neo.get("composition", "Unknown"),
+        "resource_flag": neo.get("resource_flag", False)
+    }
 
 def estimate_mass(diameter_km):
     radius_m = (diameter_km * 1000) / 2
@@ -75,7 +88,7 @@ def display_neo_alert(neo):
         print("💰 Resource-rich target for future missions!")
     print(f"{border}")
 
-def mirror_to_json(neo, path="neo_alert_log.json"):
+    neo_path = f"data_logs/neo_alert_log_{datetime.now().strftime('%Y-%m-%d')}.json"
     mirror_data = {
         "name": neo.get("name"),
         "neo_reference_id": neo.get("neo_reference_id"),
@@ -87,16 +100,17 @@ def mirror_to_json(neo, path="neo_alert_log.json"):
         "resource_flag": neo.get("resource_flag", False)
     }
 
-    file = Path(path)
+    file = Path(neo_path)
     if file.exists():
-        with open(path, "r") as f:
+        with open(neo_path, "r") as f:
             log = json.load(f)
     else:
         log = []
-
+    print("LOGGING:", mirror_data)
+    print("SAVING TO:", os.path.abspath(neo_path))
     log.append(mirror_data)
-
-    with open(path, "w") as f:
+    print("Saving to:", os.path.abspath(neo_path))
+    with open(neo_path, "w") as f:
         json.dump(log, f, indent=2)
 
 # ---------- Main Execution ----------
