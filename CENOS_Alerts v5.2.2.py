@@ -109,9 +109,26 @@ def display_neo_alert(neo):
     print("LOGGING:", mirror_data)
     print("SAVING TO:", os.path.abspath(neo_path))
     log.append(mirror_data)
-    print("Saving to:", os.path.abspath(neo_path))
-    with open(neo_path, "w") as f:
-        json.dump(log, f, indent=2)
+import subprocess
+from datetime import date
+
+from datetime import date
+import os
+
+neo_path = os.path.join("data_logs", f"neo_alert_log_{date.today()}.json")
+
+# Stage the file
+subprocess.run(["git", "add", neo_path], check=True)
+
+# Check if anything is staged
+status = subprocess.run(["git", "diff", "--cached", "--quiet"])
+if status.returncode != 0:
+    # Changes ARE staged → commit & push
+    subprocess.run(["git", "commit", "-m", f"Add NEO alert log for {date.today()}"], check=True)
+    subprocess.run(["git", "push", "origin", "Solium-Core"], check=True)
+    print("✅ Log file committed and pushed to GitHub.")
+else:
+    print("ℹ️ No changes staged—nothing to commit.")
 
 # ---------- Main Execution ----------
 
