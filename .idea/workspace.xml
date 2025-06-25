@@ -7,6 +7,7 @@
     <list default="true" id="9f91a38c-162b-4a39-b9e7-42f981a72cbc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CENOS_Alerts v5.2.2.py" beforeDir="false" afterPath="$PROJECT_DIR$/CENOS_Alerts v5.2.2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_logs/neo_alert_log_2025-06-24.json" beforeDir="false" afterPath="$PROJECT_DIR$/data_logs/neo_alert_log_2025-06-24.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,20 +36,21 @@
     <option name="showLibraryContents" value="true" />
     <option name="sortKey" value="BY_TIME_DESCENDING" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.CENOS Exporter (Fixed).executor&quot;: &quot;Run&quot;,
-    &quot;Python.CENOS_Alerts 5.3.executor&quot;: &quot;Run&quot;,
-    &quot;Python.CENOS_Alerts File Exporter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.CENOS_Alerts v5.2.2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Run CENOS Exporter.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Solium-Core&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/andy/PycharmProjects/Solium&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.CENOS Exporter (Fixed).executor": "Run",
+    "Python.CENOS_Alerts 5.3.executor": "Run",
+    "Python.CENOS_Alerts File Exporter.executor": "Run",
+    "Python.CENOS_Alerts v5.2.2.executor": "Run",
+    "Python.Run CENOS Exporter.executor": "Run",
+    "Python.mirror_to_json.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Solium-Core",
+    "last_opened_file_path": "C:/Users/andy/PycharmProjects/Solium",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Python.CENOS_Alerts v5.2.2">
     <configuration name="CENOS Exporter (Fixed)" type="PythonConfigurationType" factoryName="Python">
       <module name="Solium" />

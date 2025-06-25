@@ -6,8 +6,24 @@ import pytz
 import json
 from pathlib import Path
 from mirror_to_json import mirror_to_json
+from datetime import datetime, timedelta
+import os
+
+yesterday = (datetime.today() - timedelta(days=1)).date()
+yesterday_file = os.path.join("data_logs", f"neo_alert_log_{yesterday}.json")
+
+from datetime import date
+today = date.today()
 
 # ---------- Core Functions ----------
+if os.path.exists(yesterday_file):
+    with open(yesterday_file, "r") as f:
+        previous_data = f.read()  # Or use json.load(f) if it’s JSON
+    print(f"📦 Loaded yesterday’s data from {yesterday_file}")
+else:
+    print(f"ℹ️ No previous log found for {yesterday_file}. Starting fresh.")
+    previous_data = None
+
 def mirror_to_json(neo_path, path="neo_alert_log.json"):
     mirror_data = {
         "name": neo.get("name"),
@@ -87,7 +103,13 @@ def display_neo_alert(neo):
     if resource_flag:
         print("💰 Resource-rich target for future missions!")
     print(f"{border}")
+    import os
 
+    log_dir = os.path.join("C:\\Users", "andy", "PyCharmProjects", "Solium", "data_logs")
+    os.makedirs(log_dir, exist_ok=True)  # Creates the folder if it doesn't exist
+
+    neo_path = os.path.join(log_dir, f"neo_alert_log_{date.today()}.json")
+    print(f"📍 Saving log file to: {neo_path}")
     neo_path = f"data_logs/neo_alert_log_{datetime.now().strftime('%Y-%m-%d')}.json"
     mirror_data = {
         "name": neo.get("name"),
@@ -109,6 +131,9 @@ def display_neo_alert(neo):
     print("LOGGING:", mirror_data)
     print("SAVING TO:", os.path.abspath(neo_path))
     log.append(mirror_data)
+    with open(neo_path, "w", encoding="utf-8") as f:
+        json.dump(log, f, indent=2)
+    print("✅ Log saved successfully.")
 import os
 from datetime import date
 import subprocess
@@ -125,10 +150,17 @@ if os.path.exists(neo_path):
     else:
         print("ℹ️ No changes staged—nothing to commit.")
 else:
-    print(f"⚠️ Log file not found: {neo_path}")
+    print(f"🧪 Log file not found at {neo_path}. Creating a fresh one.")
+    with open(neo_path, "w", encoding="utf-8") as f:
+        json.dump([], f, indent=2)
+    print("📁 Empty log initialized. Git commit skipped to avoid pushing a blank entry.")
+
 
 # ---------- Main Execution ----------
+from datetime import datetime
 
+with open("cenos_heartbeat.txt", "a") as f:
+    f.write(f"Script started at {datetime.now()}\n")
 if __name__ == "__main__":
     try:
         today = datetime.utcnow().strftime("%Y-%m-%d")
