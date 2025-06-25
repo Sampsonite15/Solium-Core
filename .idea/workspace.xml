@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9f91a38c-162b-4a39-b9e7-42f981a72cbc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CENOS_Alerts v5.2.2.py" beforeDir="false" afterPath="$PROJECT_DIR$/CENOS_Alerts v5.2.2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_logs/neo_alert_log_2025-06-24.json" beforeDir="false" afterPath="$PROJECT_DIR$/data_logs/neo_alert_log_2025-06-24.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cenos_heartbeat.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cenos_heartbeat.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_logs/neo_alert_log_2025-06-25.json" beforeDir="false" afterPath="$PROJECT_DIR$/data_logs/neo_alert_log_2025-06-25.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_cenos_log.bat" beforeDir="false" afterPath="$PROJECT_DIR$/run_cenos_log.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
