@@ -2568,5 +2568,15 @@
     "hazardous": false,
     "composition": "Unknown",
     "resource_flag": false
+  },
+  {
+    "name": "(2017 BZ6)",
+    "neo_reference_id": "3767015",
+    "ars": 0.3,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 14:24 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
   }
 ]
