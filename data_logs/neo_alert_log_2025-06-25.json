@@ -2768,5 +2768,15 @@
     "hazardous": false,
     "composition": "Unknown",
     "resource_flag": false
+  },
+  {
+    "name": "(2023 BT7)",
+    "neo_reference_id": "54340429",
+    "ars": 1.2,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 12:54 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
   }
 ]
