@@ -2428,5 +2428,15 @@
     "hazardous": false,
     "composition": "Unknown",
     "resource_flag": false
+  },
+  {
+    "name": "(2017 BN32)",
+    "neo_reference_id": "3767261",
+    "ars": 0.6,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 14:18 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
   }
 ]
