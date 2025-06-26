@@ -1858,5 +1858,15 @@
     "hazardous": false,
     "composition": "Unknown",
     "resource_flag": false
+  },
+  {
+    "name": "(2021 QE2)",
+    "neo_reference_id": "54190785",
+    "ars": 0.6,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 17:39 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
   }
 ]
