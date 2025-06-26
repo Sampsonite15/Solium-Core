@@ -2628,5 +2628,15 @@
     "hazardous": false,
     "composition": "Unknown",
     "resource_flag": false
+  },
+  {
+    "name": "(2022 MM1)",
+    "neo_reference_id": "54288619",
+    "ars": 1.1,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 05:58 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
   }
 ]
