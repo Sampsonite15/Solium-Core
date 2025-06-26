@@ -2928,5 +2928,15 @@
     "hazardous": false,
     "composition": "Unknown",
     "resource_flag": false
+  },
+  {
+    "name": "(2023 TN9)",
+    "neo_reference_id": "54393146",
+    "ars": 1.7,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-25 20:03 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
   }
 ]
