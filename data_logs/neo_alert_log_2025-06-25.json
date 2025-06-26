@@ -2818,5 +2818,15 @@
     "hazardous": false,
     "composition": "Unknown",
     "resource_flag": false
+  },
+  {
+    "name": "(2012 TG53)",
+    "neo_reference_id": "3610030",
+    "ars": 2.0,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-25 20:44 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
   }
 ]
