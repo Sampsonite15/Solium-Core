@@ -888,5 +888,155 @@
     "hazardous": false,
     "composition": "Unknown",
     "resource_flag": false
+  },
+  {
+    "name": "(2012 TG53)",
+    "neo_reference_id": "3610030",
+    "ars": 2.0,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-25 20:44 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2015 FQ)",
+    "neo_reference_id": "3713320",
+    "ars": 2.0,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-25 23:51 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2015 XF261)",
+    "neo_reference_id": "3736497",
+    "ars": 0.9,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 00:44 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2017 BZ6)",
+    "neo_reference_id": "3767015",
+    "ars": 0.3,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 14:24 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2017 BN32)",
+    "neo_reference_id": "3767261",
+    "ars": 0.6,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 14:18 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2017 UE)",
+    "neo_reference_id": "3786459",
+    "ars": 0.5,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-25 22:42 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2020 OO3)",
+    "neo_reference_id": "54049355",
+    "ars": 0.7,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-25 19:00 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2021 QE2)",
+    "neo_reference_id": "54190785",
+    "ars": 0.6,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 17:39 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2022 AA)",
+    "neo_reference_id": "3843455",
+    "ars": 0.6,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 16:45 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2022 MM1)",
+    "neo_reference_id": "54288619",
+    "ars": 1.1,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 05:58 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2023 BT7)",
+    "neo_reference_id": "54340429",
+    "ars": 1.2,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 12:54 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2023 TN9)",
+    "neo_reference_id": "54393146",
+    "ars": 1.7,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-25 20:03 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2023 UQ1)",
+    "neo_reference_id": "54396393",
+    "ars": 1.2,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 06:27 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2023 XN13)",
+    "neo_reference_id": "54416849",
+    "ars": 0.4,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-25 22:17 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
+  },
+  {
+    "name": "(2025 MK2)",
+    "neo_reference_id": "54535146",
+    "ars": 0.3,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 00:15 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
   }
 ]
