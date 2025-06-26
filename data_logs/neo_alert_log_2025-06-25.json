@@ -1848,5 +1848,15 @@
     "hazardous": false,
     "composition": "Unknown",
     "resource_flag": false
+  },
+  {
+    "name": "(2020 OO3)",
+    "neo_reference_id": "54049355",
+    "ars": 0.7,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-25 19:00 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
   }
 ]
