@@ -2058,5 +2058,15 @@
     "hazardous": false,
     "composition": "Unknown",
     "resource_flag": false
+  },
+  {
+    "name": "(2023 UQ1)",
+    "neo_reference_id": "54396393",
+    "ars": 1.2,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-26 06:27 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
   }
 ]
