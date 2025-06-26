@@ -108,9 +108,31 @@ def display_neo_alert(neo):
     log_dir = os.path.join("C:\\Users", "andy", "PyCharmProjects", "Solium", "data_logs")
     os.makedirs(log_dir, exist_ok=True)  # Creates the folder if it doesn't exist
 
-    neo_path = os.path.join(log_dir, f"neo_alert_log_{date.today()}.json")
-    print(f"📍 Saving log file to: {neo_path}")
-    neo_path = f"data_logs/neo_alert_log_{datetime.now().strftime('%Y-%m-%d')}.json"
+    # 👇 NEW: Generate today's date string safely
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+
+    now_kansas = datetime.now(ZoneInfo("America/Chicago"))
+    today_str = now_kansas.strftime("%Y-%m-%d")
+    # Place this right before log path generation
+    now_local = datetime.now()
+    now_utc = datetime.utcnow()
+
+    print(f"🕒 Local time: {now_local}")
+    print(f"🌐 UTC time:  {now_utc}")
+
+    neo_path = os.path.join(log_dir, f"neo_alert_log_{today_str}.json")
+
+    print(f"📄 Saving log file to: {neo_path}")
+
+    # 🔄 Check if the log file already exists
+    if not os.path.exists(neo_path):
+        print(f"🧪 Creating a new log file for {today_str}")
+        log = []
+    else:
+        with open(neo_path, "r", encoding="utf-8") as f:
+            log = json.load(f)
+        print(f"📦 Loaded existing log from: {neo_path}")
     mirror_data = {
         "name": neo.get("name"),
         "neo_reference_id": neo.get("neo_reference_id"),
