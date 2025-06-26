@@ -2948,5 +2948,15 @@
     "hazardous": false,
     "composition": "Unknown",
     "resource_flag": false
+  },
+  {
+    "name": "(2023 XN13)",
+    "neo_reference_id": "54416849",
+    "ars": 0.4,
+    "tier": "NEGLIGIBLE",
+    "timestamp_local": "2025-06-25 22:17 CDT",
+    "hazardous": false,
+    "composition": "Unknown",
+    "resource_flag": false
   }
 ]
