@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f91a38c-162b-4a39-b9e7-42f981a72cbc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/versions/v5.2.3/backfill_logger.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Developer's Notes" beforeDir="false" afterPath="$PROJECT_DIR$/Developer's Notes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_check.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log_check.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +42,7 @@
     "Python.CENOS_Alerts File Exporter.executor": "Run",
     "Python.CENOS_Alerts v5.2.2.executor": "Run",
     "Python.Run CENOS Exporter.executor": "Run",
+    "Python.backfill_logger.executor": "Run",
     "Python.git_utils.executor": "Run",
     "Python.log_utils.executor": "Run",
     "Python.mirror_to_json.executor": "Run",
