@@ -4,7 +4,24 @@ import subprocess
 from datetime import datetime, timedelta
 import argparse
 
+import argparse
+from datetime import datetime
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--date', help='Custom target date in YYYY-MM-DD format')
+    return parser.parse_args()
+
+args = parse_args()
+
+if args.date:
+    try:
+        target_date = datetime.strptime(args.date, "%Y-%m-%d").date()
+    except ValueError:
+        print("❌ Invalid date format. Use YYYY-MM-DD.")
+        exit(1)
+else:
+    target_date = datetime.utcnow().date()
 def parse_args():
     parser = argparse.ArgumentParser(description="Run CENOS_Alerts logger across a date range.")
     parser.add_argument("--start", required=True, help="Start date in YYYY-MM-DD format")
