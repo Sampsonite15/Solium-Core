@@ -1,21 +1,43 @@
 import requests
 import os
 import math
-from datetime import datetime
-import pytz
 import json
+import subprocess
 from pathlib import Path
 from mirror_to_json import mirror_to_json
-from datetime import datetime, timedelta
-import os
+from datetime import datetime, timedelta, date
+import pytz
+
+print("🖥️ System Time (no timezone):", datetime.now())
+print("🕒 Kansas-local:", datetime.now(pytz.timezone("America/Chicago")))
+now_kansas = datetime.now(pytz.timezone("America/Chicago"))
+today_str = now_kansas.strftime("%Y-%m-%d")
+if today_str != datetime.now(pytz.timezone("America/Chicago")).strftime("%Y-%m-%d"):
+    print("⏰ Script launched too early — exiting to avoid wrong-date log.")
+    exit()
+
+log_dir = os.path.join("C:\\Users", "andy", "PyCharmProjects", "Solium", "data_logs")
+# ✅ This is what you want now:
+
+
+print("🕒 Kansas time:", now_kansas)
 
 yesterday = (datetime.today() - timedelta(days=1)).date()
 yesterday_file = os.path.join("data_logs", f"neo_alert_log_{yesterday}.json")
-
-from datetime import date
 today = date.today()
+log_dir = os.path.join("C:\\Users", "andy", "PyCharmProjects", "Solium", "data_logs")
+today_str = now_kansas.strftime("%Y-%m-%d")
+neo_path = os.path.join(log_dir, f"neo_alert_log_{today_str}.json")
 
 # ---------- Core Functions ----------
+def push_log_to_git(neo_path, today_str):
+    if os.path.exists(neo_path):
+        rel_path = os.path.relpath(neo_path, start="C:/Users/andy/PyCharmProjects/Solium").replace("\\", "/")
+        os.system(f'git -C "C:/Users/andy/PyCharmProjects/Solium" add "{rel_path}"')
+        os.system(f'git -C "C:/Users/andy/PyCharmProjects/Solium" commit -m "🛰️ Added log for {today_str}"')
+        os.system(f'git -C "C:/Users/andy/PyCharmProjects/Solium" push')
+    else:
+        print("🚫 File doesn't exist at the moment of Git push:", neo_path)
 if os.path.exists(yesterday_file):
     with open(yesterday_file, "r") as f:
         previous_data = f.read()  # Or use json.load(f) if it’s JSON
@@ -103,25 +125,15 @@ def display_neo_alert(neo):
     if resource_flag:
         print("💰 Resource-rich target for future missions!")
     print(f"{border}")
-    import os
 
-    log_dir = os.path.join("C:\\Users", "andy", "PyCharmProjects", "Solium", "data_logs")
+
     os.makedirs(log_dir, exist_ok=True)  # Creates the folder if it doesn't exist
-
-    # 👇 NEW: Generate today's date string safely
-    from datetime import datetime
-    from zoneinfo import ZoneInfo
-
-    now_kansas = datetime.now(ZoneInfo("America/Chicago"))
-    today_str = now_kansas.strftime("%Y-%m-%d")
-    # Place this right before log path generation
     now_local = datetime.now()
     now_utc = datetime.utcnow()
-
+    print("🧪 About to call Git push with:", log_dir, today_str)
+    push_log_to_git(log_dir, today_str)
     print(f"🕒 Local time: {now_local}")
     print(f"🌐 UTC time:  {now_utc}")
-
-    neo_path = os.path.join(log_dir, f"neo_alert_log_{today_str}.json")
 
     print(f"📄 Saving log file to: {neo_path}")
 
@@ -153,14 +165,16 @@ def display_neo_alert(neo):
     print("LOGGING:", mirror_data)
     print("SAVING TO:", os.path.abspath(neo_path))
     log.append(mirror_data)
-    with open(neo_path, "w", encoding="utf-8") as f:
-        json.dump(log, f, indent=2)
-    print("✅ Log saved successfully.")
-import os
-from datetime import date
-import subprocess
 
-neo_path = os.path.join("data_logs", f"neo_alert_log_{date.today()}.json")
+    print("✅ Log saved successfully.")
+
+try:
+    with open(neo_path, "r", encoding="utf-8") as f:
+        log = json.load(f)
+except FileNotFoundError:
+    log = []
+    json.dump(log, f, indent=2)
+push_log_to_git(neo_path, today_str)
 
 if os.path.exists(neo_path):
     subprocess.run(["git", "add", neo_path], check=True)
@@ -179,8 +193,6 @@ else:
 
 
 # ---------- Main Execution ----------
-from datetime import datetime
-
 with open("cenos_heartbeat.txt", "a") as f:
     f.write(f"Script started at {datetime.now()}\n")
 if __name__ == "__main__":
