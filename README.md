@@ -13,10 +13,12 @@ Each version is archived in `/versions/`, with daily logs stored in `/data_logs/
 | →       | Task Scheduler-ready, stable log formatting |
 
 ## 📁 Structure
+```
+CENOS_Alerts/ ├── data_logs/             # Daily NEO log output (auto-generated) ├── versions/              # Archived versions of the logger │   ├── v3.0/              # Initial release script │   ├── v4.2/              # Introduced basic risk scoring │   ├── v5.0/              # Refined output formatting │   ├── v5.0.1/            # Minor logging improvements │   ├── v5.1.1/            # Added ARS calculations │   ├── v5.2.0/            # Introduced hourly logging │   ├── v5.2.1/            # Integrated Git push automation │   ├── v5.2.2/            # Introduced modular design (pre-launch) │   └── v5.2.3/            # Stable, modular, fully scheduled version │       ├── neo_logger.py     # Main NEO ingestion + scoring script │       ├── log_utils.py      # Handles JSON logging logic │       └── git_utils.py      # Git automation for log pushing ├── .gitignore             # Excludes system files, pycache, etc. └── README.md              # Project overview, instructions, and version log
 
 ## ⚙️ Running the Logger
 Schedule the logger (e.g. v5.2.3) daily via Windows Task Scheduler:
-
+```
 
 ## 🛠️ Dependencies
 - Python 3.x

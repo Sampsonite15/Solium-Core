@@ -7,3 +7,6 @@ Useful Bash Commands:
     git commit -m "Describe what changed, like 'Add dedupe script and update Dev Notes'" --This commits changes to files
     git push origin Solium-Core --Pushes all committed files to Solium-Core on GitHub
     git status --Checks for items that are staged, committed, or untracked
+    mkdir -p [versions/v3.0 \] --Creates a file directory folder
+    git mv "CENOS_Alert v3.0.py" versions/v3.0/ --moves a file (in quotes) to the designated folder.
+
