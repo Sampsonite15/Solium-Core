@@ -3,31 +3,9 @@
 import subprocess
 from datetime import datetime, timedelta
 import argparse
-
-import argparse
 from datetime import datetime
-
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--date', help='Custom target date in YYYY-MM-DD format')
-    return parser.parse_args()
-
-args = parse_args()
-
-if args.date:
-    try:
-        target_date = datetime.strptime(args.date, "%Y-%m-%d").date()
-    except ValueError:
-        print("❌ Invalid date format. Use YYYY-MM-DD.")
-        exit(1)
-else:
-    target_date = datetime.utcnow().date()
-def parse_args():
-    parser = argparse.ArgumentParser(description="Run CENOS_Alerts logger across a date range.")
-    parser.add_argument("--start", required=True, help="Start date in YYYY-MM-DD format")
-    parser.add_argument("--end", required=True, help="End date in YYYY-MM-DD format")
-    return parser.parse_args()
-
+import os
+import json
 
 def date_range(start_date, end_date):
     current = start_date
@@ -35,6 +13,18 @@ def date_range(start_date, end_date):
         yield current
         current += timedelta(days=1)
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--start", required=False)
+    parser.add_argument("--end", required=False)
+    args = parser.parse_args()
+
+    if not args.start or not args.end:
+        print("⚠️ No arguments provided. Using default range.")
+        args.start = "2025-06-21"
+        args.end = "2025-07-03"
+
+    return args
 
 def main():
     args = parse_args()
@@ -44,14 +34,13 @@ def main():
     print(f"🚀 Backfilling logs from {start} to {end}")
 
     for log_date in date_range(start, end):
-        print(f"\n📅 Fetching NEOs for: {log_date}")
-        subprocess.run([
-            "python",
-            "neo_logger.py",
-            "--date",
-            log_date.isoformat()
-        ])
+        date_str = log_date.strftime("%Y-%m-%d")
+        print(f"\n🛰️ Fetching NEOs for: {date_str}")
 
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        neo_logger_path = os.path.join(script_dir, "neo_logger.py")
+
+        subprocess.run(["python", neo_logger_path, "--date", date_str])
 
 if __name__ == "__main__":
     main()

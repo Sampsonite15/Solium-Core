@@ -1,92 +1,38 @@
-# neo_logger.py
-from datetime import datetime, timedelta
-import pytz
-import requests
-from log_utils import save_log_entry
-from git_utils import push_log_to_git
+import argparse
+import os
+import json
 
-__version__ = "5.2.3"
+def parse_args():
+    parser = argparse.ArgumentParser(description="Log NEO data for a specific date.")
+    parser.add_argument("--date", required=True, help="Date in YYYY-MM-DD format")
+    return parser.parse_args()
 
-log_start_date = "2025-06-27"  # Official launch
+def save_neo_log(target_date):
+    # Create the log directory if it doesn't exist
+    log_dir = "data_logs"
+    os.makedirs(log_dir, exist_ok=True)
 
-CENTRAL = pytz.timezone("America/Chicago")
-now_kansas = datetime.now(CENTRAL)
-today_str = now_kansas.strftime("%Y-%m-%d")
-log_path = f"data_logs/neo_alert_log_{today_str}.json"
+    # Build the filename using the target date
+    filename = os.path.join(log_dir, f"neo_alert_log_{target_date}.json")
 
-def estimate_mass(diameter_km):
-    r_m = (diameter_km * 1000) / 2
-    vol = (4 / 3) * 3.1416 * r_m**3
-    return vol * 3000
-
-def calculate_ars(mass_kg, velocity_kms, hazardous):
-    base = (mass_kg**0.5) * velocity_kms * 0.005
-    return round(base + (3 if hazardous else 0), 1)
-
-def get_risk_tier(ars):
-    return "HIGH" if ars >= 7 else "MODERATE" if ars >= 4 else "NEGLIGIBLE"
-
-def mirror_to_json(neo):
-    return {
-        "name": neo.get("name"),
-        "neo_reference_id": neo.get("neo_reference_id"),
-        "ars": neo.get("ars"),
-        "tier": neo.get("tier"),
-        "timestamp_local": neo.get("timestamp_local"),
-        "hazardous": neo.get("is_potentially_hazardous_asteroid"),
-        "composition": neo.get("composition", "Unknown"),
-        "resource_flag": neo.get("resource_flag", False)
+    # Example NEO data (replace with real data fetching logic)
+    neo_data = {
+        "date": target_date,
+        "neos": [
+            {"name": "Asteroid 2025 AB", "diameter_km": 0.15},
+            {"name": "Asteroid 2025 XY", "diameter_km": 0.42}
+        ]
     }
 
-def run_cenos_logger():
-    nasa_url = "https://api.nasa.gov/neo/rest/v1/feed"
-    today = datetime.utcnow().strftime("%Y-%m-%d")
-    params = {
-        "start_date": today,
-        "end_date": today,
-        "api_key": "DEMO_KEY"
-    }
+    # Save the data to a JSON file
+    with open(filename, "w") as f:
+        json.dump(neo_data, f, indent=4)
 
-    try:
-        response = requests.get(nasa_url, params=params, timeout=10)
-        response.raise_for_status()
-        neos_today = response.json()["near_earth_objects"][today]
+    print(f"✅ Saved NEO log to {filename}")
 
-        print(f"\n🛰️ {len(neos_today)} NEOs detected for {today}")
-        for neo in neos_today:
-            try:
-                velocity_kms = float(neo["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"])
-                diameter_km = neo["estimated_diameter"]["kilometers"]["estimated_diameter_max"]
-                mass_kg = estimate_mass(diameter_km)
-                hazardous = neo["is_potentially_hazardous_asteroid"]
-
-                ars = calculate_ars(mass_kg, velocity_kms, hazardous)
-                tier = get_risk_tier(ars)
-
-                time_str = neo["close_approach_data"][0]["close_approach_date_full"]
-                close_utc = datetime.strptime(time_str, "%Y-%b-%d %H:%M").replace(tzinfo=pytz.utc)
-                local_time = close_utc.astimezone(CENTRAL).strftime("%Y-%m-%d %H:%M %Z")
-
-                neo["ars"] = ars
-                neo["tier"] = tier
-                neo["timestamp_local"] = local_time
-                neo["composition"] = "Unknown"  # Stubbed for v5.2.3
-                neo["resource_flag"] = False
-
-                entry = mirror_to_json(neo)
-                save_log_entry(log_path, entry)
-
-            except Exception as e:
-                print(f"⚠️ Skipped one NEO due to error: {e}")
-
-        push_log_to_git(log_path, f"🛰️ Added log for {today_str}")
-
-    except Exception as e:
-        print("🚫 Failed to fetch or process NEOs:", e)
+def main():
+    args = parse_args()
+    save_neo_log(args.date)
 
 if __name__ == "__main__":
-    print(f"CENOS_Alerts v{__version__} starting for {today_str}")
-    if today_str >= log_start_date:
-        run_cenos_logger()
-    else:
-        print("🕒 Not logging before launch date.")
+    main()

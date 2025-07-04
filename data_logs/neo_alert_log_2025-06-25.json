@@ -1,1 +1,13 @@
-[]
+{
+    "date": "2025-06-25",
+    "neos": [
+        {
+            "name": "Asteroid 2025 AB",
+            "diameter_km": 0.15
+        },
+        {
+            "name": "Asteroid 2025 XY",
+            "diameter_km": 0.42
+        }
+    ]
+}
