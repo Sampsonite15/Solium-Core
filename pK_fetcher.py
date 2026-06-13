@@ -1,12 +1,12 @@
 """
 pK Index Tracker - Real-Time Geomagnetic Variability Monitor
 
-This module fetches magnetometer data from a remote relay (JSON format)
-and processes it for H-component variability (deltaB), suitable for
-estimating provisional K (pK) values per observatory.
+This module fetches real-time planetary K-index data from NOAA's Space
+Weather Prediction Center and logs H-component variability (deltaB)
+for estimating provisional K (pK) values.
 
-GitHub Source: https://github.com/<your-username>/<your-repo-name>
-Last Edited: 2025-06-17
+GitHub Source: https://github.com/Sampsonite15/Solium-Core
+Last Edited: 2026-06-12
 Author: Andrew
 
 Related Modules:
@@ -19,39 +19,90 @@ Requires:
   - requests
 """
 
-# ⬇️ Your imports and code begin here
-from DeltaB_Rolling_Log import log_reading, prune_old_data
-import json
 import requests
-from datetime import datetime
+from datetime import datetime, timezone
+from DeltaB_Rolling_Log import log_reading, prune_old_data
 
-# Constants
-DATA_URL = "https://example-observatory-feed/data/latest.json"
-OBSERVATORIES = ["BOU", "FRD", "CMO"]  # Add or adjust as needed
+# NOAA Space Weather Prediction Center - 1-minute Kp feed
+DATA_URL = "https://services.swpc.noaa.gov/json/planetary_k_index_1m.json"
 
-def fetch_magnetometer_data():
-    response = requests.get(DATA_URL)
-    response.raise_for_status()
-    data = response.json()
+# K-index alert thresholds
+KP_THRESHOLDS = {
+    5: "🟡 G1 MINOR STORM",
+    6: "🟠 G2 MODERATE STORM",
+    7: "🔴 G3 STRONG STORM",
+    8: "🔴 G4 SEVERE STORM",
+    9: "🚨 G5 EXTREME STORM"
+}
+
+def get_storm_level(kp):
+    """Returns storm alert string for a given Kp value, or None if quiet."""
+    for threshold in sorted(KP_THRESHOLDS.keys(), reverse=True):
+        if kp >= threshold:
+            return KP_THRESHOLDS[threshold]
+    return None
+
+def fetch_pk_data():
+    """
+    Fetches the latest 1-minute planetary K-index data from NOAA.
+    Logs each reading and prunes old data from the rolling log.
+    Returns a list of parsed reading dicts.
+    """
+    try:
+        response = requests.get(DATA_URL, timeout=10)
+        response.raise_for_status()
+        raw_data = response.json()
+    except Exception as e:
+        print(f"⚠️ Failed to fetch pK data: {e}")
+        return []
 
     readings = []
-    for station in data["stations"]:
-        if station["code"] in OBSERVATORIES:
+    for entry in raw_data:
+        try:
+            timestamp_str = entry["time_tag"]
+            kp_value = float(entry["kp_index"])
+
             readings.append({
-                "station": station["code"],
-                "timestamp": datetime.strptime(station["timestamp"], "%Y-%m-%dT%H:%M:%SZ"),
-                "H": station["H"],
-                "D": station["D"],
-                "Z": station["Z"]
+                "station": "PLANETARY",
+                "timestamp": timestamp_str,
+                "kp": kp_value,
+                "H": kp_value  # proxy for deltaB logging compatibility
             })
-    for reading in readings:
-      log_reading(
-          reading["station"],
-          reading["timestamp"],
-          reading["H"]
-    )
+
+            log_reading("PLANETARY", timestamp_str, kp_value)
+
+        except Exception as e:
+            print(f"⚠️ Skipping entry due to error: {e}")
+
     prune_old_data()
     return readings
+
+def display_pk_summary(readings):
+    """Prints a summary of the most recent Kp reading and storm status."""
+    if not readings:
+        print("⚠️ No pK data available.")
+        return
+
+    latest = readings[-1]
+    kp = latest["kp"]
+    timestamp = latest["timestamp"]
+    storm = get_storm_level(kp)
+
+    border = "=" * 40
+    print(f"\n{border}")
+    print("🌍  PLANETARY K-INDEX REPORT".center(40))
+    print(f"{border}")
+    print(f"Latest Kp:      {kp}")
+    print(f"Timestamp:      {timestamp} UTC")
+    print(f"Readings logged: {len(readings)}")
+
+    if storm:
+        print(f"\n{storm}")
+    else:
+        print(f"\n🟢 Geomagnetic conditions quiet")
+
+    print(f"{border}")
+
 if __name__ == "__main__":
-    readings = fetch_magnetometer_data()
-    print(readings)  # Optional: sanity check
+    readings = fetch_pk_data()
+    display_pk_summary(readings)
