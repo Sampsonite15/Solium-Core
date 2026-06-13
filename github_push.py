@@ -71,7 +71,7 @@ def push_all():
 
    files = [
        ("CENOS_Alerts v5.2.0.py", "CENOS_Alerts v5.2.0.py"),
-       ("CENOS_mirror_json.py",   "CENOS_mirror_json.py"),
+       ("CENOS_mirror.json.py", "CENOS_mirror_json.py"),
        ("mirror_to_json.py",      "mirror_to_json.py"),
        ("dedupe_cenos.py",        "dedupe_cenos.py"),
        ("pK_fetcher.py",          "pK_fetcher.py"),
