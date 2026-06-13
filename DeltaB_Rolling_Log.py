@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta
+
+from datetime import datetime, timedelta, timezone
 
 # Store recent readings
 log = []
@@ -16,12 +17,17 @@ def log_reading(station, timestamp, h_value):
 
 def prune_old_data():
     global log
-    cutoff = datetime.utcnow() - timedelta(minutes=ROLLING_WINDOW_MINUTES)
+    cutoff = datetime.now(timezone.utc) - timedelta(minutes=ROLLING_WINDOW_MINUTES)
     pruned_log = []
 
     for entry in log:
         try:
-            timestamp = datetime.fromisoformat(entry["timestamp"].replace("Z", "+00:00"))
+            ts = entry["timestamp"]
+            if isinstance(ts, str):
+                ts = ts.replace("Z", "+00:00")
+                timestamp = datetime.fromisoformat(ts)
+                if timestamp.tzinfo is None:
+                    timestamp = timestamp.replace(tzinfo=timezone.utc)
             if timestamp >= cutoff:
                 pruned_log.append(entry)
         except Exception as e:
